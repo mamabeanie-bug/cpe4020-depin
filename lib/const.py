@@ -14,6 +14,6 @@ class Type(Enum):
 
 
 class Address:
-    BROADCAST = ("11.21.7.255", 6561)
-    VALIDATOR = "11.21.7.144"
-    WALLET    = "11.21.7.144"
+    BROADCAST = ("40.20.11.255", 6561)
+    VALIDATOR = "40.20.11.243"
+    WALLET    = "40.20.11.29"
