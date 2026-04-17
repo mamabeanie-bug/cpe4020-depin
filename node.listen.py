@@ -59,10 +59,13 @@ def handle_request(s):
 
 def send_all(msg):
     for v in Address.VALIDATORS:
-        with socket.socket(socket.AF_INET, socket.SOCK_STREAM):
-            tcp_v = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            tcp_v.connect(Address.VALIDATORS[v])
-            tcp_v.send(msg)
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM):
+                tcp_v = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                tcp_v.connect(Address.VALIDATORS[v])
+                tcp_v.send(msg)
+        except ConnectionRefusedError:
+            print("Failed to connect on node {}.".format(v))
 
 def handle_channel(tcp):
     with tcp:
