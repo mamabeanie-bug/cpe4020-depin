@@ -85,7 +85,7 @@ def handle_channel(tcp):
         pending.pop(tcp)
         tcp.close()
 
-def poll():
+def fulfill():
     try:
         while len(pending) > 0:
             (read_ready, _, _) = select.select(pending.keys(), [], [])
@@ -102,6 +102,6 @@ def close():
 if __name__ == "__main__":
     try:
         send({ "test": True })
-        poll()
+        fulfill()
     finally:
         close()
