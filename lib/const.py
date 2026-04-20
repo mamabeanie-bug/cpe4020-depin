@@ -17,20 +17,21 @@ class Type(Enum):
     def __str__(self):
         return "'" + self.name + "'"
 
-
 class Address:
-    LOCAL = "10.100.153.11"
+    HOST = ipaddress.ip_interface("10.100.153.11/18")
+    HOST_IP = str(HOST.ip)
+    HOST_NETWORK = str(HOST.network)
+    HOST_BROADCAST = str(HOST.network.broadcast_address)
 
     VALIDATORS = {
-        "V01": (LOCAL, 6562),
-        "V02": (LOCAL, 6563),
-        "V03": (LOCAL, 6564),
+        "V01": (HOST_IP, 6562),
+        "V02": (HOST_IP, 6563),
+        "V03": (HOST_IP, 6564),
     }
 
     WALLETS = {
-        "W01": (LOCAL, 0),
-        "W02": (LOCAL, 0),
+        "W01": (HOST_IP, 0),
+        "W02": (HOST_IP, 0),
     }
 
-    NETWORK = ipaddress.ip_network(VALIDATORS["V01"][0])
-    BROADCAST = (str(NETWORK.broadcast_address), 6561)
+    BROADCAST = (HOST_BROADCAST, 6561)
